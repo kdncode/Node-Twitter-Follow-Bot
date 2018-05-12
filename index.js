@@ -1,6 +1,8 @@
 const Twit = require('twit');
 
 var T = new Twit({
+
+    // Replace with your key from: https://apps.twitter.com/
     consumer_key: '',
     consumer_secret: '',
     access_token: '',
@@ -26,25 +28,25 @@ function onAuthenticated(err, res) {
     stream.on('error', onError)
 }
 
-function onFollowed(){
+function onFollowed(event){
     var name = event.source.name;
     var screenName = event.source.screen_name;
     var response = '@' + screenName + ' Thank you for following, ' + name + '!';
+
+    // statuses/update comes from Twitter docs: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update
+    T.post('statuses/update', {
+        status: response
+    }, onTweeted)
 
     // Tweet response to user here
     console.log('I was followed by: ' + name + ' @' + screenName);
 }
 
-function onError() {
+function onError(error) {
     throw error
 }
 
-// statuses/update comes from Twitter docs: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update
-T.post('statuses/update', {
-    status: response
-}, onTweeted)
-
-function onTweeted() {
+function onTweeted(err, reply) {
     if (err !== undefined) {
         console.log(err)
     } else {
