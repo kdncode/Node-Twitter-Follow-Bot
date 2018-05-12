@@ -39,7 +39,9 @@ function onFollowed(event){
     }, onTweeted)
 
     // Tweet response to user here
-    console.log('I was followed by: ' + name + ' @' + screenName);
+    var today = new Date();
+
+    console.log(today + ': I was followed by: ' + name + '. Twitter ID: @' + screenName);
 }
 
 function onError(error) {
