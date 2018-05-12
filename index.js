@@ -23,6 +23,18 @@ function onAuthenticated(err, res) {
 
     // Listen to follow event
     stream.on('follow', onFollowed)
-    stream.on('error', onerror)
+    stream.on('error', onError)
 }
 
+function onFollowed(){
+    var name = event.source.name;
+    var screenName = event.source.screen_name;
+    var response = '@' + screenName + ' Thank you for following, ' + name + '!';
+
+    // Tweet response to user here
+    console.log('I was followed by: ' + name + ' @' + screenName);
+}
+
+function onError() {
+    throw error
+}
