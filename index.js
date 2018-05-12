@@ -20,4 +20,9 @@ function onAuthenticated(err, res) {
     // Twitter filter what we don't want
     // in this case, we want only follow
     var stream = T.stream('user')
+
+    // Listen to follow event
+    stream.on('follow', onFollowed)
+    stream.on('error', onerror)
 }
+
