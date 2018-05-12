@@ -16,4 +16,8 @@ T.get('account/verify_credentials', {
 function onAuthenticated(err, res) {
     if (err) { throw err }
     console.log('Authentication successful. Running bot...\r\n')
+
+    // Twitter filter what we don't want
+    // in this case, we want only follow
+    var stream = T.stream('user')
 }
