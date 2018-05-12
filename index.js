@@ -38,3 +38,16 @@ function onFollowed(){
 function onError() {
     throw error
 }
+
+// statuses/update comes from Twitter docs: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update
+T.post('statuses/update', {
+    status: response
+}, onTweeted)
+
+function onTweeted() {
+    if (err !== undefined) {
+        console.log(err)
+    } else {
+        console.log('Tweeted: ' + reply.text)
+    }
+}
